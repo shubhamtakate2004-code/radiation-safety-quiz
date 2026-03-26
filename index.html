@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="robots" content="noindex,nofollow"/>
+<title>Radiation Safety IQ · Conference Championship 2025</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Outfit:wght@300;400;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
+<style>
+/* ═══════════════════════════════════════════════
+   VARIABLES & RESET
+═══════════════════════════════════════════════ */
+:root {
+  --navy:    #080D1A;
+  --panel:   #0C1830;
+  --card:    #101F3C;
+  --teal:    #00E5CC;
+  --teal2:   #00B8A9;
+  --teal3:   #006B65;
+  --gold:    #FFD166;
+  --gold2:   #E6B84A;
+  --gold3:   #9B6F1A;
+  --white:   #EEF4FF;
+  --muted:   #6A82A8;
+  --green:   #22C55E;
+  --red:     #EF4444;
+  --orange:  #F59E0B;
+  --danger:  #FF3B3B;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px}
+body{
+  background:var(--navy);color:var(--white);
+  font-family:'Outfit',sans-serif;
+  min-height:100vh;
+  user-select:none;
+  -webkit-user-select:none;
+  -moz-user-select:none;
+}
+
+/* Animated grid */
+body::before{
+  content:'';position:fixed;inset:0;
+  background-image:
+    linear-gradient(rgba(0,229,204,.03) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,229,204,.03) 1px,transparent 1px);
+  background-size:40px 40px;
+  animation:gridMove 25s linear infinite;
+  pointer-events:none;z-index:0;
+}
+@keyframes gridMove{to{background-position:40px 40px}}
+
+/* Orbs */
+.orb{position:fixed;border-radius:50%;filter:blur(90px);opacity:.1;pointer-events:none;z-index:0}
+.o1{width:500px;height:500px;background:var(--teal);top:-150px;left:-150px;animation:orb 18s ease-in-out infinite alternate}
+.o2{width:400px;height:400px;background:var(--gold);bottom:-120px;right:-120px;animation:orb 14s ease-in-out infinite alternate-reverse}
+@keyframes orb{to{transform:translate(40px,30px)}}
+
+/* ═══ LAYOUT ═══ */
+.app{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:20px 16px 40px}
+
+/* ═══ SCREENS ═══ */
+.screen{display:none;width:100%;max-width:740px;animation:rise .45s cubic-bezier(.16,1,.3,1) forwards}
+.screen.active{display:block}
+@keyframes rise{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+/* ═══ CARDS ═══ */
+.card{background:rgba(16,31,60,.85);border:1px solid rgba(0,229,204,.14);border-radius:18px;padding:28px;backdrop-filter:blur(14px);margin-bottom:16px}
+.card-sm{padding:18px 22px;border-radius:12px}
+
+/* ═══ TYPOGRAPHY ═══ */
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:4px;color:var(--teal);text-transform:uppercase;margin-bottom:10px}
+h1.hero{font-family:'Rajdhani',sans-serif;font-size:clamp(28px,6vw,52px);font-weight:700;line-height:1.05;letter-spacing:.5px}
+h1.hero .t{color:var(--teal)}
+h1.hero .g{color:var(--gold)}
+.sub{font-size:14px;color:var(--muted);font-weight:300;line-height:1.6;margin-top:8px}
+
+/* ═══ STAT CHIPS ═══ */
+.chips{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:20px 0}
+.chip{background:rgba(0,229,204,.06);border:1px solid rgba(0,229,204,.15);border-radius:10px;padding:14px 8px;text-align:center}
+.chip-n{font-family:'Rajdhani',sans-serif;font-size:26px;font-weight:700;color:var(--gold);line-height:1}
+.chip-l{font-size:10px;color:var(--muted);margin-top:3px;letter-spacing:.5px}
+
+/* ═══ FORM ═══ */
+.field{margin-bottom:16px}
+.field label{display:block;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2.5px;color:var(--teal);text-transform:uppercase;margin-bottom:7px}
+.field input{width:100%;padding:13px 16px;background:rgba(0,0,0,.35);border:1px solid rgba(0,229,204,.22);border-radius:10px;color:var(--white);font-family:'Outfit',sans-serif;font-size:15px;outline:none;transition:border-color .2s}
+.field input:focus{border-color:var(--teal)}
+.field input::placeholder{color:var(--muted)}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+
+/* ═══ BUTTONS ═══ */
+.btn{width:100%;padding:15px;border:none;border-radius:12px;font-family:'Rajdhani',sans-serif;font-size:17px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:all .22s}
+.btn-primary{background:linear-gradient(135deg,var(--teal3),var(--teal2));color:var(--white);box-shadow:0 0 24px rgba(0,229,204,.25)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 0 36px rgba(0,229,204,.4)}
+.btn-primary:disabled{opacity:.45;cursor:not-allowed;transform:none}
+.btn-gold{background:linear-gradient(135deg,var(--gold3),var(--gold2));color:#0A0A0A}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 0 28px rgba(255,209,102,.4)}
+.btn-ghost{background:transparent;border:1px solid rgba(255,255,255,.1);color:var(--muted);font-size:14px;padding:12px}
+.btn-ghost:hover{border-color:rgba(255,255,255,.25);color:var(--white)}
+
+/* ═══ QUIZ HEADER ═══ */
+.quiz-topbar{display:flex;align-items:center;gap:14px;margin-bottom:20px;flex-wrap:wrap}
+
+/* TIMER */
+.timer-wrap{display:flex;align-items:center;gap:10px;background:rgba(16,31,60,.9);border:1px solid rgba(0,229,204,.2);border-radius:12px;padding:10px 18px;min-width:160px}
+.timer-icon{font-size:18px}
+.timer-display{font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:600;color:var(--teal);letter-spacing:2px;line-height:1;transition:color .3s}
+.timer-label{font-size:9px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-top:2px}
+.timer-wrap.warn .timer-display{color:var(--orange);animation:pulse .8s ease-in-out infinite}
+.timer-wrap.danger .timer-display{color:var(--danger);animation:pulse .4s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+
+/* PROGRESS */
+.progress-wrap{flex:1;min-width:160px}
+.progress-meta{display:flex;justify-content:space-between;margin-bottom:6px;font-size:11px}
+.progress-q{font-family:'JetBrains Mono',monospace;color:var(--muted);letter-spacing:1px}
+.progress-score{font-family:'JetBrains Mono',monospace;color:var(--teal)}
+.progress-bar{height:5px;background:rgba(255,255,255,.07);border-radius:3px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--teal3),var(--teal));border-radius:3px;transition:width .5s cubic-bezier(.16,1,.3,1);box-shadow:0 0 8px var(--teal)}
+
+/* DIFFICULTY BADGE */
+.diff-badge{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;padding:4px 12px;border-radius:20px;white-space:nowrap}
+.diff-easy{background:rgba(34,197,94,.12);color:#86efac;border:1px solid rgba(34,197,94,.25)}
+.diff-medium{background:rgba(245,158,11,.12);color:#fcd34d;border:1px solid rgba(245,158,11,.25)}
+.diff-hard{background:rgba(239,68,68,.12);color:#fca5a5;border:1px solid rgba(239,68,68,.25)}
+
+/* CATEGORY TAG */
+.cat-tag{font-size:10px;color:var(--muted);letter-spacing:1px;font-family:'JetBrains Mono',monospace;margin-bottom:8px;text-transform:uppercase}
+
+/* QUESTION */
+.q-text{font-family:'Rajdhani',sans-serif;font-size:clamp(17px,2.8vw,22px);font-weight:700;line-height:1.35;margin-bottom:20px}
+
+/* OPTIONS */
+.options{display:flex;flex-direction:column;gap:9px;margin-bottom:18px}
+.opt{display:flex;align-items:center;gap:13px;padding:14px 16px;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.07);border-radius:11px;color:var(--white);font-size:14px;cursor:pointer;text-align:left;width:100%;transition:all .18s;font-family:'Outfit',sans-serif}
+.opt:hover:not(:disabled){border-color:var(--teal);background:rgba(0,229,204,.07);transform:translateX(4px)}
+.opt-letter{width:28px;height:28px;flex-shrink:0;border-radius:50%;border:1px solid rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:700;transition:all .18s}
+.opt.correct{border-color:var(--green);background:rgba(34,197,94,.1)}
+.opt.correct .opt-letter{background:var(--green);border-color:var(--green);color:#000}
+.opt.wrong{border-color:var(--red);background:rgba(239,68,68,.1)}
+.opt.wrong .opt-letter{background:var(--red);border-color:var(--red);color:#fff}
+.opt:disabled{cursor:default}
+
+/* FEEDBACK */
+.feedback{padding:13px 16px;border-radius:10px;font-size:13px;line-height:1.65;display:none;margin-bottom:14px}
+.feedback.show{display:block}
+.feedback.correct{background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.28);color:#86efac}
+.feedback.wrong{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.28);color:#fca5a5}
+.feedback strong{display:block;margin-bottom:4px;font-size:14px}
+
+/* NEXT */
+.next-btn{width:100%;padding:13px;background:var(--panel);border:1px solid rgba(0,229,204,.22);border-radius:11px;color:var(--teal);font-family:'Rajdhani',sans-serif;font-size:16px;font-weight:700;letter-spacing:1px;cursor:pointer;transition:all .2s;display:none;text-transform:uppercase}
+.next-btn.show{display:block}
+.next-btn:hover{background:rgba(0,229,204,.09);border-color:var(--teal)}
+
+/* ═══ RESULTS ═══ */
+.results-hero{text-align:center;margin-bottom:24px}
+.score-ring-wrap{display:flex;justify-content:center;margin:20px 0}
+.score-ring{position:relative;width:160px;height:160px}
+.score-ring svg{transform:rotate(-90deg)}
+.ring-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.ring-pct{font-family:'Rajdhani',sans-serif;font-size:40px;font-weight:700;color:var(--gold);line-height:1}
+.ring-frac{font-size:12px;color:var(--muted);letter-spacing:2px;margin-top:2px}
+
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+.stat-box{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:14px;text-align:center}
+.stat-val{font-family:'Rajdhani',sans-serif;font-size:24px;font-weight:700;color:var(--teal)}
+.stat-lbl{font-size:10px;color:var(--muted);letter-spacing:1px;margin-top:2px}
+
+.breakdown{display:flex;flex-direction:column;gap:7px;margin-bottom:6px;max-height:260px;overflow-y:auto;padding-right:4px}
+.breakdown::-webkit-scrollbar{width:3px}
+.breakdown::-webkit-scrollbar-track{background:transparent}
+.breakdown::-webkit-scrollbar-thumb{background:var(--teal3);border-radius:2px}
+.bd-item{display:flex;align-items:center;gap:10px;padding:10px 13px;background:rgba(255,255,255,.02);border-radius:7px;font-size:12px}
+.bd-icon{flex-shrink:0;font-size:14px}
+.bd-text{flex:1;color:var(--muted);line-height:1.4}
+.bd-res{font-family:'JetBrains Mono',monospace;font-size:10px;flex-shrink:0}
+.bd-res.ok{color:var(--green)}
+.bd-res.fail{color:var(--red)}
+.bd-diff{font-size:9px;font-family:'JetBrains Mono',monospace;padding:2px 7px;border-radius:20px;margin-left:6px}
+
+/* ═══ CERTIFICATE ═══ */
+.cert{background:linear-gradient(150deg,#060C1E,#0C1830);border:2px solid var(--gold2);border-radius:20px;padding:36px 32px;text-align:center;position:relative;overflow:hidden;margin-bottom:16px}
+.cert::before{content:'';position:absolute;inset:7px;border:1px solid rgba(255,209,102,.18);border-radius:14px;pointer-events:none}
+.cert-corner{position:absolute;width:36px;height:36px;border-color:var(--gold2);border-style:solid;opacity:.55}
+.tl{top:11px;left:11px;border-width:2px 0 0 2px;border-radius:3px 0 0 0}
+.tr{top:11px;right:11px;border-width:2px 2px 0 0;border-radius:0 3px 0 0}
+.bl{bottom:11px;left:11px;border-width:0 0 2px 2px;border-radius:0 0 0 3px}
+.br{bottom:11px;right:11px;border-width:0 2px 2px 0;border-radius:0 0 3px 0}
+.cert-icon{font-size:46px;display:block;margin-bottom:8px}
+.cert-issued{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--teal);text-transform:uppercase;margin-bottom:10px}
+.cert-certifies{font-family:'Rajdhani',sans-serif;font-size:12px;font-weight:600;color:var(--muted);letter-spacing:3px;text-transform:uppercase;margin-bottom:4px}
+.cert-name{font-family:'Rajdhani',sans-serif;font-size:clamp(22px,4vw,34px);font-weight:700;color:var(--white);margin-bottom:4px;text-shadow:0 0 20px rgba(0,229,204,.3)}
+.cert-designation{font-family:'Rajdhani',sans-serif;font-size:clamp(18px,3vw,26px);font-weight:700;color:var(--gold);margin-bottom:12px}
+.cert-body{font-size:12px;color:var(--muted);line-height:1.75;margin-bottom:16px;max-width:420px;margin-left:auto;margin-right:auto}
+.cert-chips{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+.cert-chip{font-family:'JetBrains Mono',monospace;font-size:11px;padding:5px 14px;border-radius:20px}
+.cc-gold{background:rgba(255,209,102,.1);border:1px solid rgba(255,209,102,.3);color:var(--gold)}
+.cc-teal{background:rgba(0,229,204,.1);border:1px solid rgba(0,229,204,.3);color:var(--teal)}
+.cert-div{height:1px;background:linear-gradient(90deg,transparent,rgba(255,209,102,.3),transparent);margin:0 0 16px}
+.cert-footer{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:10px}
+.cert-sig-name{font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:700;color:var(--white);text-align:left}
+.cert-sig-role{font-size:9px;color:var(--muted);letter-spacing:1px;text-align:left}
+.cert-seal-icon{font-size:30px}
+.cert-seal-txt{font-size:8px;color:var(--muted);letter-spacing:1px}
+.cert-id{font-family:'JetBrains Mono',monospace;font-size:8px;color:rgba(106,130,168,.4);margin-top:14px}
+
+/* Fail cert */
+.cert.fail{border-color:var(--teal3)}
+.cert.fail::before{border-color:rgba(0,229,204,.12)}
+.cert.fail .cert-corner{border-color:var(--teal3)}
+
+/* ═══ TIMEOUT OVERLAY ═══ */
+.timeout-overlay{position:fixed;inset:0;background:rgba(8,13,26,.96);z-index:100;display:none;align-items:center;justify-content:center;flex-direction:column;gap:16px;text-align:center}
+.timeout-overlay.show{display:flex;animation:rise .4s ease}
+.timeout-icon{font-size:64px;animation:pulse .6s ease-in-out infinite}
+.timeout-title{font-family:'Rajdhani',sans-serif;font-size:36px;font-weight:700;color:var(--danger)}
+.timeout-sub{font-size:14px;color:var(--muted);max-width:300px;line-height:1.6}
+
+/* ═══ ANTI-CHEAT WARNING ═══ */
+.ac-warn{position:fixed;top:0;left:0;right:0;background:var(--danger);color:#fff;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:2px;text-align:center;padding:8px;z-index:200;display:none;animation:rise .2s ease}
+.ac-warn.show{display:block}
+
+/* ═══ SCROLL ═══ */
+.scroll-zone{max-height:calc(100vh - 200px);overflow-y:auto;padding-right:4px}
+.scroll-zone::-webkit-scrollbar{width:3px}
+.scroll-zone::-webkit-scrollbar-track{background:transparent}
+.scroll-zone::-webkit-scrollbar-thumb{background:var(--teal3)}
+
+@media(max-width:560px){
+  .chips{grid-template-columns:repeat(2,1fr)}
+  .stats-row{grid-template-columns:repeat(3,1fr)}
+  .field-row{grid-template-columns:1fr}
+  .quiz-topbar{flex-direction:column;align-items:stretch}
+  .timer-wrap{justify-content:center}
+}
+</style>
+</head>
+<body>
+<div class="orb o1"></div>
+<div class="orb o2"></div>
+<div class="ac-warn" id="ac-warn">⚠ SECURITY ALERT — Action blocked. Results may be flagged.</div>
+
+<!-- TIMEOUT OVERLAY -->
+<div class="timeout-overlay" id="timeout-overlay">
+  <div class="timeout-icon">⏰</div>
+  <div class="timeout-title">TIME'S UP!</div>
+  <div class="timeout-sub">Your 5-minute session has ended. Remaining questions marked as unattempted.</div>
+  <button class="btn btn-primary" style="max-width:240px;margin-top:8px" onclick="finalizeResults()">View My Results →</button>
+</div>
+
+<div class="app">
+
+<!-- ════════════════════ INTRO ════════════════════ -->
+<div id="s-intro" class="screen active">
+  <div style="text-align:center;margin-bottom:28px;padding-top:16px">
+    <div class="eyebrow">☢ Radiation Safety · Championship Quiz 2025</div>
+    <h1 class="hero">Radiation <span class="t">Safety</span><br><span class="g">IQ Championship</span></h1>
+    <p class="sub">200+ participants · 30 randomised questions · 5-minute sprint<br>Score in the top 10% to earn the <strong style="color:var(--gold)">Elite Shield</strong> certificate.</p>
+  </div>
+
+  <div class="card">
+    <div class="chips">
+      <div class="chip"><div class="chip-n">60</div><div class="chip-l">Question Bank</div></div>
+      <div class="chip"><div class="chip-n">30</div><div class="chip-l">Per Session</div></div>
+      <div class="chip"><div class="chip-n">5<span style="font-size:14px">min</span></div><div class="chip-l">Time Limit</div></div>
+      <div class="chip"><div class="chip-n">≥70%</div><div class="chip-l">to Certify</div></div>
+    </div>
+
+    <div class="field-row">
+      <div class="field"><label>Full Name</label><input id="inp-name" type="text" placeholder="Dr. Priya Sharma" maxlength="60"/></div>
+      <div class="field"><label>Designation</label><input id="inp-desig" type="text" placeholder="Radiology Technologist" maxlength="60"/></div>
+    </div>
+    <div class="field-row">
+      <div class="field"><label>Institution</label><input id="inp-inst" type="text" placeholder="City Imaging Center, Pune" maxlength="80"/></div>
+      <div class="field"><label>Participant ID</label><input id="inp-pid" type="text" placeholder="e.g. CONF-2025-042" maxlength="30"/></div>
+    </div>
+
+    <div style="background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.2);border-radius:10px;padding:13px 16px;font-size:12px;color:#fca5a5;margin-bottom:18px;line-height:1.6">
+      <strong style="color:var(--red);display:block;margin-bottom:4px">⚠ Competition Rules</strong>
+      Right-click, copy, and text selection are disabled. Tab-switching is monitored. Timer auto-submits at 0:00. Answers cannot be changed once selected.
+    </div>
+
+    <button class="btn btn-primary" id="start-btn" onclick="startQuiz()">⚡ Begin Championship Sprint</button>
+  </div>
+</div>
+
+<!-- ════════════════════ QUIZ ════════════════════ -->
+<div id="s-quiz" class="screen">
+  <div class="quiz-topbar">
+    <div class="timer-wrap" id="timer-wrap">
+      <div class="timer-icon">⏱</div>
+      <div>
+        <div class="timer-display" id="timer-display">5:00</div>
+        <div class="timer-label">remaining</div>
+      </div>
+    </div>
+    <div class="progress-wrap">
+      <div class="progress-meta">
+        <span class="progress-q" id="q-counter">Q 1 / 30</span>
+        <span class="progress-score" id="live-score">✓ 0 &nbsp;✗ 0</span>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" id="prog-fill" style="width:0%"></div></div>
+    </div>
+    <div class="diff-badge" id="diff-badge">EASY</div>
+  </div>
+
+  <div class="card">
+    <div class="cat-tag" id="q-cat">Category</div>
+    <div class="q-text" id="q-text">Question text here</div>
+    <div class="options" id="q-opts"></div>
+    <div class="feedback" id="q-feedback"></div>
+    <button class="next-btn" id="next-btn" onclick="nextQ()">Next →</button>
+  </div>
+</div>
+
+<!-- ════════════════════ RESULTS ════════════════════ -->
+<div id="s-results" class="screen">
+  <div class="results-hero">
+    <div class="eyebrow" id="r-badge">Results</div>
+    <h1 class="hero" id="r-title" style="font-size:clamp(22px,5vw,38px)"></h1>
+  </div>
+
+  <div class="card">
+    <div class="score-ring-wrap">
+      <div class="score-ring">
+        <svg width="160" height="160" viewBox="0 0 160 160">
+          <circle cx="80" cy="80" r="68" stroke="rgba(255,255,255,.05)" stroke-width="13" fill="none"/>
+          <circle cx="80" cy="80" r="68" id="ring-arc" stroke="url(#rg)" stroke-width="13" fill="none"
+            stroke-linecap="round" stroke-dasharray="427" stroke-dashoffset="427"/>
+          <defs><linearGradient id="rg" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#006B65"/><stop offset="100%" stop-color="#00E5CC"/>
+          </linearGradient></defs>
+        </svg>
+        <div class="ring-center">
+          <div class="ring-pct" id="r-pct">0%</div>
+          <div class="ring-frac" id="r-frac">0/30</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-box"><div class="stat-val" id="st-correct">0</div><div class="stat-lbl">Correct</div></div>
+      <div class="stat-box"><div class="stat-val" id="st-time" style="color:var(--gold)">—</div><div class="stat-lbl">Time Used</div></div>
+      <div class="stat-box"><div class="stat-val" id="st-percentile" style="color:var(--orange)">—</div><div class="stat-lbl">Percentile*</div></div>
+    </div>
+    <p style="font-size:10px;color:var(--muted);text-align:center;margin-bottom:16px">*Percentile is simulated for demonstration. Live leaderboard integration available.</p>
+
+    <details style="margin-bottom:4px">
+      <summary style="cursor:pointer;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:15px;color:var(--teal);padding:8px 0;letter-spacing:1px">▾ QUESTION BREAKDOWN</summary>
+      <div class="breakdown" id="breakdown" style="margin-top:12px"></div>
+    </details>
+  </div>
+
+  <!-- CERTIFICATE -->
+  <div class="cert" id="certificate">
+    <div class="cert-corner tl"></div><div class="cert-corner tr"></div>
+    <div class="cert-corner bl"></div><div class="cert-corner br"></div>
+    <span class="cert-icon" id="cert-icon">🏅</span>
+    <div class="cert-issued" id="cert-issued-text">Certificate of Achievement</div>
+    <div class="cert-certifies">This certifies that</div>
+    <div class="cert-name" id="cert-name">—</div>
+    <div class="cert-designation" id="cert-desig-display">—</div>
+    <div style="font-size:11px;color:var(--muted);margin-bottom:6px" id="cert-inst-display">—</div>
+    <div class="cert-designation" id="cert-award" style="font-size:clamp(16px,2.5vw,22px);margin-bottom:12px">Radiation Safety Guardian</div>
+    <div class="cert-body" id="cert-body">—</div>
+    <div class="cert-chips">
+      <span class="cert-chip cc-gold" id="cert-chip-score">Score: —</span>
+      <span class="cert-chip cc-teal" id="cert-chip-pct">Percentile: —</span>
+      <span class="cert-chip cc-gold" id="cert-chip-time">Time: —</span>
+    </div>
+    <div class="cert-div"></div>
+    <div class="cert-footer">
+      <div><div class="cert-sig-name">Invisible Architecture Initiative</div><div class="cert-sig-role">Radiation Safety Championship · Conference 2025</div></div>
+      <div style="text-align:right"><div class="cert-seal-icon">☢</div><div class="cert-seal-txt">VERIFIED</div></div>
+    </div>
+    <div class="cert-id" id="cert-id-line">—</div>
+  </div>
+
+  <button class="btn btn-gold" onclick="downloadCert()" style="margin-bottom:10px">⬇ Download Certificate (Print)</button>
+  <button class="btn btn-ghost" onclick="location.reload()">↺ Restart (New Question Set)</button>
+</div>
+
+</div><!-- /app -->
+
+<script>
+/* ═══════════════════════════════
+   ANTI-CHEAT
+═══════════════════════════════ */
+let cheatWarnings = 0;
+function fireCheatWarn(msg){
+  cheatWarnings++;
+  const w = document.getElementById('ac-warn');
+  w.textContent = `⚠ SECURITY: ${msg} — Warning ${cheatWarnings}/3`;
+  w.classList.add('show');
+  setTimeout(()=>w.classList.remove('show'),3000);
+}
+document.addEventListener('contextmenu',e=>{e.preventDefault();fireCheatWarn('Right-click blocked')});
+document.addEventListener('copy',e=>{e.preventDefault();fireCheatWarn('Copy blocked')});
+document.addEventListener('cut',e=>{e.preventDefault();fireCheatWarn('Cut blocked')});
+document.addEventListener('keydown',e=>{
+  if(e.key==='PrintScreen'){fireCheatWarn('Screenshot key detected')}
+  if((e.ctrlKey||e.metaKey)&&['c','v','u','s','a'].includes(e.key.toLowerCase())){
+    e.preventDefault();fireCheatWarn('Keyboard shortcut blocked');
+  }
+});
+// Visibility change monitoring
+document.addEventListener('visibilitychange',()=>{
+  if(document.hidden && quizActive) fireCheatWarn('Tab switch detected');
+});
+
+/* ═══════════════════════════════
+   QUESTION BANK — 60 QUESTIONS
+═══════════════════════════════ */
+const BANK = [
+// ─── EASY (1–20) ───────────────────────────────────────────
+{id:1,cat:'Radiology Physics',diff:'easy',
+q:'What does the unit "mSv" stand for in radiation dosimetry?',
+opts:['Milli-Sievert','Mega-Sievert','Micro-Sievert','Milli-Svelte'],
+ans:0,
+exp:'mSv = milli-Sievert. The Sievert (Sv) is the SI unit of effective dose, accounting for both the amount of radiation energy absorbed and its biological effect on tissue.'},
+
+{id:2,cat:'Safety Protocols',diff:'easy',
+q:'What does "ALARA" stand for?',
+opts:['As Low As Reasonably Achievable','Authorized Limit for Annual Radiation Allowance','Atomic Level Assessment for Radiation Activity','All Limits Are Regulatory Approximations'],
+ans:0,
+exp:'ALARA — As Low As Reasonably Achievable — is the guiding philosophy of radiation protection. Every clinical decision should aim to minimise dose while achieving the diagnostic goal.'},
+
+{id:3,cat:'Radiology Physics',diff:'easy',
+q:'Which of the following is an example of ionising radiation?',
+opts:['Visible light','Radio waves','X-rays','Infrared radiation'],
+ans:2,
+exp:'X-rays are ionising radiation — they carry enough energy to remove electrons from atoms, creating ions that can damage biological molecules including DNA.'},
+
+{id:4,cat:'Safety Protocols',diff:'easy',
+q:'The three pillars of the classic Radiation Protection Triangle are:',
+opts:['Time, Dose, Shielding','Distance, Monitoring, Compliance','Time, Distance, Shielding','ALARA, Justification, Optimisation'],
+ans:2,
+exp:'Time · Distance · Shielding. Reduce exposure TIME, maximise DISTANCE from the source, and use appropriate SHIELDING. All three work synergistically.'},
+
+{id:5,cat:'AERB Guidelines',diff:'easy',
+q:'AERB stands for:',
+opts:['Atomic Energy Regulatory Board','Advanced Energy Research Bureau','Atomic Exposure Review Body','Authorised Emission Radiation Board'],
+ans:0,
+exp:'AERB — Atomic Energy Regulatory Board — is India\'s national regulatory body for nuclear and radiological safety, operating under the Atomic Energy Act, 1962.'},
+
+{id:6,cat:'Radiology Physics',diff:'easy',
+q:'The annual natural background radiation dose received by an average person worldwide is approximately:',
+opts:['0.24 mSv','2.4 mSv','24 mSv','240 mSv'],
+ans:1,
+exp:'The global average natural background dose is ~2.4 mSv/year, sourced from cosmic rays, terrestrial radionuclides (radon, soil), and internal body radionuclides (K-40).'},
+
+{id:7,cat:'Safety Protocols',diff:'easy',
+q:'A lead apron\'s primary purpose in diagnostic radiology is to:',
+opts:['Absorb primary beam radiation','Attenuate scatter radiation reaching the RT','Block all types of radiation','Reduce patient dose only'],
+ans:1,
+exp:'Lead aprons are designed to attenuate SCATTER radiation (secondary radiation deflected off the patient/table) that would otherwise reach the RT. They are not sufficient to protect against the primary beam.'},
+
+{id:8,cat:'Radiology Physics',diff:'easy',
+q:'What is the approximate patient dose from a standard PA chest X-ray?',
+opts:['0.002 mSv','0.02 mSv','0.2 mSv','2 mSv'],
+ans:1,
+exp:'A PA chest X-ray delivers ~0.02 mSv — roughly equivalent to 2–3 days of natural background radiation. This context is crucial when counselling anxious patients.'},
+
+{id:9,cat:'Safety Protocols',diff:'easy',
+q:'Which personal dosimeter is most commonly used for whole-body monitoring of radiation workers?',
+opts:['Ionisation chamber','Geiger-Müller counter','Thermoluminescent dosimeter (TLD) badge','Proportional counter'],
+ans:2,
+exp:'TLD badges are the standard personal dosimeter for radiation workers. They accumulate dose over a monitoring period (usually 1–3 months) and are then read out by the radiation safety officer.'},
+
+{id:10,cat:'Healthcare Safety Mgmt',diff:'easy',
+q:'In radiation safety management, "justification" means:',
+opts:['Documenting all doses in a register','Ensuring the benefit of a radiation procedure outweighs its risk','Minimising dose to ALARA levels','Obtaining patient written consent'],
+ans:1,
+exp:'Justification (ICRP Principle 1) means no radiation exposure should proceed unless the expected benefit exceeds the detriment. It is the first gate that every diagnostic or therapeutic procedure must pass.'},
+
+{id:11,cat:'Radiology Physics',diff:'easy',
+q:'Which type of radiation has the highest penetrating power?',
+opts:['Alpha particles','Beta particles','Gamma rays','Neutrons'],
+ans:2,
+exp:'Gamma rays (and X-rays) have the highest penetrating power among common radiation types. Alpha particles are stopped by a sheet of paper; beta by a few mm of plastic; gamma requires lead/concrete.'},
+
+{id:12,cat:'AERB Guidelines',diff:'easy',
+q:'According to AERB, the annual occupational effective dose limit for radiation workers is:',
+opts:['1 mSv/year','5 mSv/year','20 mSv/year','50 mSv/year'],
+ans:2,
+exp:'AERB mandates 20 mSv/year averaged over 5 consecutive years, with no single year exceeding 30 mSv. This aligns with ICRP Publication 103 recommendations.'},
+
+{id:13,cat:'Safety Protocols',diff:'easy',
+q:'Which of the following best describes "deterministic effects" of radiation?',
+opts:['Effects with no threshold — probability increases with dose','Effects that only occur above a threshold dose with predictable severity','Effects that appear immediately regardless of dose','Genetic effects passed to future generations'],
+ans:1,
+exp:'Deterministic effects (tissue reactions) have a threshold — below it, no clinical effect. Above it, severity increases with dose. Examples: cataracts, skin erythema, acute radiation syndrome.'},
+
+{id:14,cat:'Radiology Physics',diff:'easy',
+q:'The Inverse Square Law states that radiation intensity is:',
+opts:['Directly proportional to distance','Inversely proportional to distance','Inversely proportional to the square of the distance','Directly proportional to the square of the distance'],
+ans:2,
+exp:'Intensity ∝ 1/d². Double the distance → intensity drops to 1/4. This is why distance is such a powerful and simple protective measure — two steps back can quarter your dose.'},
+
+{id:15,cat:'Healthcare Safety Mgmt',diff:'easy',
+q:'A "Radiation Safety Officer" (RSO) in a hospital is primarily responsible for:',
+opts:['Operating X-ray equipment','Prescribing imaging procedures','Implementing the radiation protection programme','Reporting diagnostic findings'],
+ans:2,
+exp:'The RSO oversees the entire radiation protection programme: personnel monitoring, equipment calibration, regulatory compliance, incident investigation, and staff training.'},
+
+{id:16,cat:'AERB Guidelines',diff:'easy',
+q:'Under AERB regulations, pregnant radiation workers should not exceed how much dose to the foetus?',
+opts:['1 mSv for entire pregnancy','5 mSv per trimester','20 mSv for entire pregnancy','2 mSv per month'],
+ans:0,
+exp:'AERB (aligned with ICRP) recommends the foetal dose should not exceed 1 mSv for the entire declared pregnancy. Once a worker declares pregnancy, reassignment to lower-dose roles is standard practice.'},
+
+{id:17,cat:'Radiology Physics',diff:'easy',
+q:'kVp in X-ray equipment primarily controls:',
+opts:['Quantity of X-rays produced','Quality (energy/penetrating power) of X-rays','Exposure time','Focal spot size'],
+ans:1,
+exp:'kVp (kilovoltage peak) determines the maximum energy of X-ray photons — their quality and penetrating power. Higher kVp → more penetrating beam → lower patient dose but reduced contrast.'},
+
+{id:18,cat:'Safety Protocols',diff:'easy',
+q:'mAs in X-ray technique primarily controls:',
+opts:['Quality of X-rays','Penetrating power of the beam','Quantity of X-rays produced','Focal spot size'],
+ans:2,
+exp:'mAs (milliampere-seconds) = tube current × time. It controls the quantity (number) of X-ray photons produced, directly affecting patient dose and image density.'},
+
+{id:19,cat:'Healthcare Safety Mgmt',diff:'easy',
+q:'The primary purpose of a "dose audit" in a radiology department is:',
+opts:['To bill patients correctly for radiation used','To compare departmental doses with Diagnostic Reference Levels (DRLs)','To monitor TLD badges of staff','To calibrate X-ray tube output'],
+ans:1,
+exp:'Dose audits compare patient doses against nationally/internationally established Diagnostic Reference Levels (DRLs). Doses significantly above DRLs trigger a technique review to identify optimisation opportunities.'},
+
+{id:20,cat:'Radiology Physics',diff:'easy',
+q:'Which radiation type is used in conventional diagnostic X-ray and CT imaging?',
+opts:['Alpha radiation','Beta radiation','X-rays (photon radiation)','Neutron radiation'],
+ans:2,
+exp:'Diagnostic imaging uses X-rays — electromagnetic radiation (photons) produced when fast electrons decelerate in the X-ray tube anode. CT uses the same radiation but acquires multiple projections.'},
+
+// ─── MEDIUM (21–45) ─────────────────────────────────────────
+{id:21,cat:'Radiology Physics',diff:'medium',
+q:'The Half-Value Layer (HVL) is defined as the thickness of material that:',
+opts:['Completely stops an X-ray beam','Reduces beam intensity by 50%','Reduces beam intensity by 90%','Doubles the beam intensity'],
+ans:1,
+exp:'HVL is the thickness of a specified material (e.g., lead, aluminium) that reduces the beam intensity to exactly half its original value. HVL is used to characterise beam quality and design shielding.'},
+
+{id:22,cat:'AERB Guidelines',diff:'medium',
+q:'AERB\'s Radiation Protection Rules (2004) are framed under which Act?',
+opts:['Environment Protection Act 1986','Atomic Energy Act 1962','Radiation Safety Act 2001','Nuclear Safety Board Act 1995'],
+ans:1,
+exp:'All AERB regulations, including the Radiation Protection Rules 2004, are framed under the Atomic Energy Act, 1962 — the primary legislation governing nuclear and radiation safety in India.'},
+
+{id:23,cat:'Healthcare Safety Mgmt',diff:'medium',
+q:'Diagnostic Reference Levels (DRLs) in medical imaging represent:',
+opts:['Maximum permissible patient dose limits','Dose levels for typical patients that should not routinely be exceeded without good reason','Minimum dose required for diagnostic image quality','Occupational dose limits for radiologists'],
+ans:1,
+exp:'DRLs are dose levels that, for standard examinations in standard-sized patients, should not routinely be exceeded. They are investigational triggers, not dose limits — exceeding them warrants technique review, not prosecution.'},
+
+{id:24,cat:'Radiology Physics',diff:'medium',
+q:'The photoelectric effect in diagnostic X-ray imaging primarily:',
+opts:['Produces scatter radiation contributing to fog','Provides image contrast by differentially absorbing X-rays in different tissues','Occurs only at very high kVp levels','Converts X-ray energy directly to light without ionisation'],
+ans:1,
+exp:'The photoelectric effect (dominant at low-medium kVp) involves complete X-ray photon absorption by the atom. It is responsible for high contrast between tissues of different atomic numbers (e.g., bone vs. soft tissue), forming the basis of radiographic contrast.'},
+
+{id:25,cat:'Safety Protocols',diff:'medium',
+q:'A radiation worker\'s TLD reads 8 mSv for the quarter. What is the most appropriate immediate action?',
+opts:['File an incident report and suspend the worker','Review work practices and compare with previous quarters to identify cause','Terminate employment as limits are exceeded','Take no action as quarterly dose is within annual limit'],
+ans:1,
+exp:'8 mSv/quarter (32 mSv projected annually) exceeds the 20 mSv/year limit if sustained. The RSO should investigate the cause — unusual procedures, TLD mishandling, equipment malfunction — before drawing conclusions or taking punitive action.'},
+
+{id:26,cat:'AERB Guidelines',diff:'medium',
+q:'Under AERB regulations, X-ray equipment in India requires a valid Licence. Who grants this licence?',
+opts:['State Health Department','Central Pollution Control Board','AERB (Atomic Energy Regulatory Board)','Bureau of Indian Standards (BIS)'],
+ans:2,
+exp:'AERB is the sole licensing authority for all radiation-generating equipment in India, including diagnostic X-ray machines, CT scanners, and fluoroscopy units. Unlicensed operation is a criminal offence under the Atomic Energy Act.'},
+
+{id:27,cat:'Radiology Physics',diff:'medium',
+q:'Compton scatter in diagnostic imaging primarily:',
+opts:['Improves image contrast','Produces radiation that contributes to occupational exposure of staff','Occurs only at very low kVp','Is completely absorbed within the patient'],
+ans:1,
+exp:'Compton scattering (dominant at diagnostic kVp ranges) produces scattered photons that travel in all directions — these are the primary source of occupational radiation exposure to RTs and radiologists during fluoroscopy and mobile radiography.'},
+
+{id:28,cat:'Healthcare Safety Mgmt',diff:'medium',
+q:'In ICRP\'s three principles of radiation protection, "optimisation" means:',
+opts:['Using the highest kVp always','Keeping all doses as low as reasonably achievable, considering economic and social factors','Ensuring dose never exceeds limits','Justifying each procedure individually'],
+ans:1,
+exp:'Optimisation (ALARA principle) means adjusting protection measures so that exposures are as low as reasonably achievable, balancing dose reduction against practical constraints like image quality, procedure complexity, and cost.'},
+
+{id:29,cat:'Safety Protocols',diff:'medium',
+q:'The "controlled area" in a radiology department is designated for:',
+opts:['Patients only','Staff who are trained and whose exposure is monitored','Visitors to the department','Administrative personnel'],
+ans:1,
+exp:'A controlled area is where dose rates or contamination levels require specific protective measures. Only trained, monitored radiation workers should routinely occupy controlled areas during X-ray procedures.'},
+
+{id:30,cat:'Radiology Physics',diff:'medium',
+q:'Which of the following contributes MOST to effective dose in a CT abdomen-pelvis examination?',
+opts:['Compton scatter outside the scan volume','Primary beam dose to organs within the scan range','Natural background radiation during the scan','Photoelectric interactions in table padding'],
+ans:1,
+exp:'In CT, effective dose is dominated by the primary beam dose deposited in organs within the scan range. For abdomen-pelvis CT, radiosensitive organs (gonads, bowel, liver) are directly irradiated, resulting in typical effective doses of 8–15 mSv.'},
+
+{id:31,cat:'AERB Guidelines',diff:'medium',
+q:'How frequently must personal dosimeters (TLD badges) be exchanged/read in a high-dose-rate area as per AERB?',
+opts:['Annually','Every 6 months','Monthly','Weekly'],
+ans:2,
+exp:'AERB requires monthly TLD exchange for workers in high-dose areas (>1 mSv/month expected). For lower dose areas, quarterly exchange is acceptable. More frequent exchange allows earlier detection of anomalous exposures.'},
+
+{id:32,cat:'Healthcare Safety Mgmt',diff:'medium',
+q:'Radiation incidents should be reported to AERB when the dose received by a worker exceeds:',
+opts:['The annual limit in any quarter','The annual limit in any month','Twice the annual effective dose limit in a year','Any dose above normal background'],
+ans:2,
+exp:'Per AERB guidelines, an abnormal exposure event requiring mandatory reporting occurs when a worker receives >40 mSv in a year (twice the 20 mSv annual limit), or when equipment malfunction causes a patient dose significantly above intended.'},
+
+{id:33,cat:'Radiology Physics',diff:'medium',
+q:'The unit "Gray" (Gy) measures:',
+opts:['Effective dose accounting for radiation type','Absorbed dose (energy deposited per unit mass)','Equivalent dose to a specific organ','Radioactivity of a source'],
+ans:1,
+exp:'1 Gray = 1 Joule of energy absorbed per kilogram of tissue. It is the physical absorbed dose, not accounting for biological effectiveness. Effective dose (Sv) additionally weights by radiation type and organ sensitivity.'},
+
+{id:34,cat:'Safety Protocols',diff:'medium',
+q:'Protective equipment in interventional radiology typically includes all of the following EXCEPT:',
+opts:['Lead apron (0.5 mm Pb eq.)','Thyroid collar','Lead glasses','Oxygen mask'],
+ans:3,
+exp:'Standard IR protection: lead apron, thyroid collar (thyroid is radiosensitive), lead glasses (cataract prevention — threshold ~0.5 Gy), ceiling-mounted shield, and sometimes lead gloves. An oxygen mask has no radiation protection function.'},
+
+{id:35,cat:'Healthcare Safety Mgmt',diff:'medium',
+q:'Which imaging modality delivers zero ionising radiation to the patient?',
+opts:['CT scan','Fluoroscopy','Magnetic Resonance Imaging (MRI)','Nuclear Medicine PET scan'],
+ans:2,
+exp:'MRI uses radiofrequency waves and strong magnetic fields — zero ionising radiation. This is a critical point for patient communication. CT, fluoroscopy, and PET all use ionising radiation.'},
+
+{id:36,cat:'AERB Guidelines',diff:'medium',
+q:'AERB requires that X-ray rooms in hospitals have walls with a minimum shielding equivalent to:',
+opts:['0.5 mm lead','1.0 mm lead','1.5 mm lead','2.0 mm lead'],
+ans:2,
+exp:'AERB\'s SSID (Safety Standards and Implementing Document) for medical X-ray installations requires primary barriers equivalent to 1.5 mm lead and secondary barriers of 1.0 mm lead, though exact requirements depend on workload and occupancy calculations.'},
+
+{id:37,cat:'Radiology Physics',diff:'medium',
+q:'The "radiation weighting factor" (wR) for X-rays and gamma rays is:',
+opts:['0.5','1','5','20'],
+ans:1,
+exp:'X-rays and gamma rays have a radiation weighting factor of 1 — the reference radiation type. Alpha particles = 20, neutrons = 5–20. Higher wR = greater biological effectiveness per unit absorbed dose.'},
+
+{id:38,cat:'Healthcare Safety Mgmt',diff:'medium',
+q:'A radiology department implementing "Image Gently" principles is focused on:',
+opts:['Improving adult imaging protocols','Optimising radiation dose in paediatric patients','Increasing image resolution in CT','Improving MRI scan speed'],
+ans:1,
+exp:'"Image Gently" is an international campaign by the Alliance for Radiation Safety in Pediatric Imaging, focused on reducing unnecessary radiation exposure in children — who are more radiosensitive than adults due to longer life expectancy and higher cell division rates.'},
+
+{id:39,cat:'Safety Protocols',diff:'medium',
+q:'Scattered radiation during fluoroscopy is highest:',
+opts:['At the image intensifier/detector end','At the X-ray tube end','Directly above the patient\'s body','Behind the radiologist standing at the table'],
+ans:0,
+exp:'Scatter intensity follows the primary beam direction. At the detector end (where the beam exits the patient), scatter is relatively lower. Highest scatter emanates from the patient\'s entry surface — the tube side — where the primary beam enters and Compton scattering is maximum.'},
+
+{id:40,cat:'Radiology Physics',diff:'medium',
+q:'The dose-area product (DAP) is used primarily to:',
+opts:['Measure staff occupational dose','Estimate effective dose to the patient from fluoroscopy/radiography','Calculate the activity of radioactive sources','Determine shielding thickness required'],
+ans:1,
+exp:'DAP (Dose-Area Product) = air kerma × beam area. It provides a measure of the total radiation energy delivered to the patient and is the primary metric for patient dose management in fluoroscopy, radiography, and dental imaging.'},
+
+{id:41,cat:'AERB Guidelines',diff:'medium',
+q:'Which document must be maintained for each radiation worker under AERB regulations?',
+opts:['Personal Radiation Exposure Record (dose history)','Annual medical fitness certificate only','Insurance policy document','Equipment operation logbook only'],
+ans:0,
+exp:'AERB requires a Personal Radiation Exposure Record (dose history dossier) for every classified radiation worker, maintained for the duration of employment plus 30 years (or to age 75). This long-term record is essential for epidemiological studies and occupational disease claims.'},
+
+{id:42,cat:'Healthcare Safety Mgmt',diff:'medium',
+q:'The "Image Wisely" campaign targets:',
+opts:['Paediatric imaging dose reduction','Adult imaging dose optimisation and appropriateness','MRI safety protocols','Nuclear medicine waste management'],
+ans:1,
+exp:'"Image Wisely" (adult companion to "Image Gently") encourages ordering clinicians and imaging professionals to use only necessary imaging and to optimise protocols in adult patients, reducing population-level radiation exposure.'},
+
+{id:43,cat:'Radiology Physics',diff:'medium',
+q:'In digital radiography, what happens to image noise if you reduce mAs by 50% without compensating?',
+opts:['Noise decreases proportionally','Noise is unaffected — digital systems self-correct','Noise increases (image becomes grainier)','Contrast improves while noise decreases'],
+ans:2,
+exp:'Reducing mAs reduces photon fluence. Fewer photons → greater quantum noise (mottle) → degraded image quality. Digital detectors can compensate processing appearance, but true quantum noise increases. This is why "dose creep" occurs — RTs raise mAs unnecessarily to ensure noise-free images.'},
+
+{id:44,cat:'Safety Protocols',diff:'medium',
+q:'Which area classification in radiation protection designates zones where dose rates exceed 3 mSv/hour?',
+opts:['Supervised area','Controlled area','Restricted zone','Radiation emergency zone'],
+ans:1,
+exp:'Per AERB/ICRP classification, "controlled areas" have dose rates or contamination levels requiring specific protective measures and restricted access. Typical threshold: >3 mSv/hour, or where annual doses could exceed 6 mSv/year.'},
+
+{id:45,cat:'Healthcare Safety Mgmt',diff:'medium',
+q:'A radiology manager finds that the department\'s average CT abdomen dose is 40% above the national DRL. The BEST first response is:',
+opts:['Immediately suspend all CT operations','Review and audit CT protocols compared to peer institutions and reduce unnecessarily high kVp/mAs','Report all radiologists to AERB immediately','Purchase new CT equipment'],
+ans:1,
+exp:'Dose above DRL is an optimisation trigger. The appropriate response is protocol audit — review scan parameters (kVp, mAs, pitch, scan length, number of phases) against peer institutions and evidence-based guidelines, then implement evidence-based reductions without compromising diagnostic quality.'},
+
+// ─── HARD (46–60) ───────────────────────────────────────────
+{id:46,cat:'Radiology Physics',diff:'hard',
+q:'The linear-no-threshold (LNT) model is controversial primarily because:',
+opts:['It overestimates doses at high radiation levels','It assumes risk at very low doses based on extrapolation from high-dose data, without direct evidence at diagnostic levels','It underestimates occupational dose in fluoroscopy','It conflicts with the AERB dose limits'],
+ans:1,
+exp:'LNT extrapolates cancer risk linearly from high-dose atomic bomb survivor data down to zero dose. Critics argue this extrapolation is scientifically unvalidated at <100 mSv and may overestimate real risk at diagnostic doses, potentially causing undue patient anxiety and inappropriate refusal of needed imaging.'},
+
+{id:47,cat:'AERB Guidelines',diff:'hard',
+q:'Under AERB\'s Quality Assurance Programme for diagnostic X-ray equipment, which parameter is tested daily before clinical use?',
+opts:['HVL measurement','kVp accuracy','Artefact assessment on a standard phantom','Focal spot size measurement'],
+ans:2,
+exp:'Daily QA for digital X-ray/CT includes artefact check on a standard phantom to detect detector malfunctions before patient use. kVp accuracy and HVL are tested periodically (quarterly/annually). Focal spot size is typically an acceptance and annual test.'},
+
+{id:48,cat:'Healthcare Safety Mgmt',diff:'hard',
+q:'In radiation risk communication using the BEIR VII report, the excess lifetime risk of cancer mortality from a single 10 mSv whole-body dose is approximately:',
+opts:['1 in 100','1 in 1,000','1 in 10,000','1 in 100,000'],
+ans:1,
+exp:'BEIR VII estimates ~1 in 1,000 lifetime cancer mortality risk per 100 mSv for the average person, translating to ~1 in 10,000 per 10 mSv. Context: spontaneous lifetime cancer risk is ~40%, so a 10 mSv dose increases it from 40.000% to 40.010% — extremely small in absolute terms.'},
+
+{id:49,cat:'Radiology Physics',diff:'hard',
+q:'Pair production in X-ray interactions requires photon energies of at least:',
+opts:['0.511 MeV','1.022 MeV','10 MeV','0.1 MeV'],
+ans:1,
+exp:'Pair production occurs when a photon with energy ≥1.022 MeV (= 2 × electron rest mass energy of 0.511 MeV each) interacts with the nuclear Coulomb field, creating an electron-positron pair. This does not occur at diagnostic X-ray energies (60–120 kVp = 0.06–0.12 MeV).'},
+
+{id:50,cat:'Safety Protocols',diff:'hard',
+q:'An RT is performing a mobile chest X-ray on a COVID ICU patient. The correct minimum distance from the X-ray tube to stand (without a protective barrier) is:',
+opts:['0.5 metres','1 metre','2 metres (preferably with shielding)','Distance is irrelevant if a lead apron is worn'],
+ans:2,
+exp:'Per ICRP and ACR guidelines, for mobile radiography, the RT should stand ≥2 metres from the patient/tube, use the maximum cable length, stand behind the beam direction when possible, and wear a lead apron. At 2m, inverse square law reduces scatter to ~1/4 of the 1m level.'},
+
+{id:51,cat:'AERB Guidelines',diff:'hard',
+q:'AERB classifies radiation workers into two categories. Category A workers are those who may receive annual doses exceeding:',
+opts:['1 mSv','3/10 of the annual dose limit (6 mSv)','10 mSv','Half the annual limit (10 mSv)'],
+ans:1,
+exp:'AERB Category A workers: those likely to receive >3/10 of the annual limit (>6 mSv). Category B: 1–6 mSv. Category A workers require: monthly TLD monitoring, annual medical examination, maintained dose history, and access to AERB\'s Dose Registry System (NRDS).'},
+
+{id:52,cat:'Healthcare Safety Mgmt',diff:'hard',
+q:'A hospital is designing a new CT suite. The primary shielding barrier must account for which factors? (Select the most complete answer)',
+opts:['kVp only','Workload (W), Use factor (U), Occupancy factor (T), and distance','Distance and occupancy only','Lead thickness only, based on manufacturer recommendation'],
+ans:1,
+exp:'Shielding design uses the NCRP 151 methodology: W (workload — weekly mA output), U (use factor — fraction of time beam faces that wall), T (occupancy — fraction of time the area beyond is occupied), and distance. All four must be calculated to produce a compliant, cost-effective barrier.'},
+
+{id:53,cat:'Radiology Physics',diff:'hard',
+q:'In CT dose measurement, CTDI (Computed Tomography Dose Index) is measured using a:',
+opts:['TLD badge placed on the patient','100mm pencil ionisation chamber in a standard PMMA phantom','Geiger-Müller tube at isocentre','Film dosimeter in the scan plane'],
+ans:1,
+exp:'CTDI₁₀₀ is measured using a 100mm pencil ionisation chamber integrated over the central 100mm of a standard PMMA head (16cm) or body (32cm) phantom. CTDIvol and CTDI_w are derived from these measurements to characterise scanner dose output.'},
+
+{id:54,cat:'Safety Protocols',diff:'hard',
+q:'The "glove-use paradox" in interventional radiology refers to:',
+opts:['Lead gloves cause more infections than non-lead gloves','Wearing lead gloves may paradoxically increase patient dose if the operator\'s hands stray into the primary beam','Lead gloves reduce tactile sensation causing procedure errors','Lead gloves are incompatible with sterile technique'],
+ans:1,
+exp:'Lead gloves attenuate the beam reaching the operator\'s hands. The paradox: the system\'s AEC (automatic exposure control) senses reduced dose at the detector (because hands absorb it) and increases output to compensate — potentially increasing patient dose. Some authorities recommend lead gloves only outside the primary beam.'},
+
+{id:55,cat:'AERB Guidelines',diff:'hard',
+q:'The AERB document "TS-R-D-5005" (or equivalent safety code) for medical diagnostic X-ray facilities specifies the maximum permissible dose rate in a supervised area as:',
+opts:['<1 mSv/week','<3 mSv/hour','<7.5 μSv/hour (equivalent to ~1 mSv/week for 40 hours)','<20 μSv/hour'],
+ans:2,
+exp:'Supervised areas must have dose rates <7.5 μSv/hour — equivalent to <1 mSv per 40-hour working week. This ensures workers who casually occupy these areas (unmonitored) do not exceed the 1 mSv/year public dose limit prorated for occupancy.'},
+
+{id:56,cat:'Healthcare Safety Mgmt',diff:'hard',
+q:'Using a Balanced Scorecard framework for a radiology department\'s radiation safety KPIs, which perspective is MOST neglected in traditional safety programs?',
+opts:['Financial perspective','Customer/Patient perspective','Internal Process perspective','Learning and Growth (staff competency) perspective'],
+ans:3,
+exp:'Traditional radiation safety programmes focus on process metrics (dose records, incident reports) but systematically neglect the Learning & Growth perspective: regular competency assessment, simulation training, root-cause learning from near-misses, and building a genuine safety culture — which ultimately drives all other metrics sustainably.'},
+
+{id:57,cat:'Radiology Physics',diff:'hard',
+q:'The effective dose from a 64-slice CT coronary angiography (CTCA) using prospective ECG-gating versus retrospective gating shows what approximate dose reduction?',
+opts:['5–10% reduction','10–20% reduction','50–80% reduction','No significant difference'],
+ans:2,
+exp:'Prospective ECG-gating (axial acquisition only during the desired cardiac phase) reduces effective dose by 50–80% compared to retrospective helical gating (which irradiates continuously throughout the cardiac cycle). Modern prospective protocols achieve CTCA doses of 1–3 mSv vs. 8–20 mSv retrospectively.'},
+
+{id:58,cat:'Healthcare Safety Mgmt',diff:'hard',
+q:'A "Just Culture" in radiation safety management specifically means:',
+opts:['Punishing all radiation incidents equally','Distinguishing between human error, at-risk behaviour, and reckless behaviour in the response to safety incidents','Ensuring all workers receive just (fair) pay','Applying the same safety rules to all staff regardless of seniority'],
+ans:1,
+exp:'"Just Culture" (David Marx\'s framework): errors are treated as system failures to learn from; at-risk behaviour (shortcuts) is coached; reckless behaviour (conscious disregard of known risks) is sanctioned. This creates psychological safety for reporting near-misses — essential for a learning safety system.'},
+
+{id:59,cat:'Radiology Physics',diff:'hard',
+q:'Radiation hormesis, as a hypothesis, proposes that:',
+opts:['All radiation is beneficial in small doses','Very low doses of radiation may stimulate adaptive biological responses that are net beneficial','Radiation doubles cancer risk at any dose level','High-dose radiation is therapeutic while low-dose is carcinogenic'],
+ans:1,
+exp:'Radiation hormesis proposes a biphasic dose-response: very low doses (<10 mSv) may stimulate DNA repair mechanisms, immune surveillance, and antioxidant responses, potentially conferring net benefit. This remains scientifically controversial and does not replace ALARA as the operational principle.'},
+
+{id:60,cat:'Healthcare Safety Mgmt',diff:'hard',
+q:'Under the New Approach to radiation governance (ICRP Publication 138, 2022), the concept replacing traditional "dose limits" for occupational workers is:',
+opts:['Dose bands with colour-coded risk categories','Reference levels replacing all numerical limits','Retained dose limits within a risk-informed, graded approach with expanded emphasis on optimisation below limits','Removal of individual dose monitoring in low-dose workplaces'],
+ans:2,
+exp:'ICRP 138 retains numerical dose limits but shifts emphasis to: (1) risk-informed optimisation below limits, (2) graded approach based on actual dose distributions (most workers receive <1 mSv/year), and (3) systemic workplace culture over individual compliance — reflecting the reality that most occupational exposure occurs far below limits.'},
+];
+
+/* ═══════════════════════════════
+   STATE
+═══════════════════════════════ */
+let session = [];
+let currentQ = 0;
+let score = 0;
+let correct = 0;
+let wrong = 0;
+let answered = false;
+let timerInterval = null;
+let timeLeft = 300; // 5 minutes
+let timeUsed = 0;
+let quizActive = false;
+let userData = {};
+let sessionAnswers = []; // {correct: bool}
+
+/* ═══════════════════════════════
+   SHUFFLE
+═══════════════════════════════ */
+function shuffle(arr){
+  const a=[...arr];
+  for(let i=a.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+
+/* Build session: 30 random questions, shuffled options */
+function buildSession(){
+  const shuffled = shuffle(BANK);
+  session = shuffled.slice(0,30).map(q=>{
+    // Shuffle options but track correct answer
+    const indexed = q.opts.map((o,i)=>({text:o,orig:i}));
+    const shuffledOpts = shuffle(indexed);
+    const newAns = shuffledOpts.findIndex(o=>o.orig===q.ans);
+    return {...q, displayOpts: shuffledOpts.map(o=>o.text), displayAns: newAns};
+  });
+}
+
+/* ═══════════════════════════════
+   TIMER
+═══════════════════════════════ */
+function startTimer(){
+  timerInterval = setInterval(()=>{
+    timeLeft--;
+    timeUsed++;
+    const m = Math.floor(timeLeft/60);
+    const s = timeLeft%60;
+    document.getElementById('timer-display').textContent =
+      `${m}:${s.toString().padStart(2,'0')}`;
+    const tw = document.getElementById('timer-wrap');
+    if(timeLeft<=60 && timeLeft>30) tw.className='timer-wrap warn';
+    else if(timeLeft<=30) tw.className='timer-wrap danger';
+    if(timeLeft<=0){
+      clearInterval(timerInterval);
+      showTimeoutOverlay();
+    }
+  },1000);
+}
+
+function showTimeoutOverlay(){
+  quizActive=false;
+  document.getElementById('timeout-overlay').classList.add('show');
+}
+
+/* ═══════════════════════════════
+   START
+═══════════════════════════════ */
+function startQuiz(){
+  const name = document.getElementById('inp-name').value.trim();
+  if(!name){
+    document.getElementById('inp-name').style.borderColor='var(--red)';
+    document.getElementById('inp-name').focus();
+    setTimeout(()=>document.getElementById('inp-name').style.borderColor='',2000);
+    return;
+  }
+  userData = {
+    name,
+    desig: document.getElementById('inp-desig').value.trim() || 'Radiology Professional',
+    inst:  document.getElementById('inp-inst').value.trim() || '—',
+    pid:   document.getElementById('inp-pid').value.trim() || ('CONF-'+Math.random().toString(36).substr(2,6).toUpperCase()),
+  };
+  buildSession();
+  currentQ=0; score=0; correct=0; wrong=0; sessionAnswers=[];
+  quizActive=true;
+  showScreen('quiz');
+  renderQ();
+  startTimer();
+}
+
+/* ═══════════════════════════════
+   RENDER QUESTION
+═══════════════════════════════ */
+function renderQ(){
+  answered=false;
+  const q = session[currentQ];
+  const total = session.length;
+  const pct = Math.round(currentQ/total*100);
+
+  document.getElementById('q-counter').textContent = `Q ${currentQ+1} / ${total}`;
+  document.getElementById('live-score').textContent = `✓ ${correct}  ✗ ${wrong}`;
+  document.getElementById('prog-fill').style.width = pct+'%';
+
+  const db = document.getElementById('diff-badge');
+  db.className = 'diff-badge diff-'+q.diff;
+  db.textContent = q.diff.toUpperCase();
+
+  document.getElementById('q-cat').textContent = q.cat;
+  document.getElementById('q-text').textContent = q.q;
+
+  const fb = document.getElementById('q-feedback');
+  fb.className='feedback'; fb.innerHTML='';
+  const nb = document.getElementById('next-btn');
+  nb.className='next-btn';
+  nb.textContent = currentQ < session.length-1 ? 'Next Question →' : 'View My Results →';
+
+  const optsWrap = document.getElementById('q-opts');
+  optsWrap.innerHTML='';
+  const letters=['A','B','C','D'];
+  q.displayOpts.forEach((opt,i)=>{
+    const btn=document.createElement('button');
+    btn.className='opt';
+    btn.innerHTML=`<span class="opt-letter">${letters[i]}</span><span>${opt}</span>`;
+    btn.onclick=()=>selectAnswer(i,btn,q);
+    optsWrap.appendChild(btn);
+  });
+}
+
+/* ═══════════════════════════════
+   SELECT ANSWER
+═══════════════════════════════ */
+function selectAnswer(idx,btn,q){
+  if(answered) return;
+  answered=true;
+  document.querySelectorAll('.opt').forEach(b=>b.disabled=true);
+  const fb=document.getElementById('q-feedback');
+  const isCorrect = idx===q.displayAns;
+  if(isCorrect){
+    correct++;score++;
+    sessionAnswers.push(true);
+    btn.classList.add('correct');
+    fb.className='feedback correct show';
+    fb.innerHTML=`<strong>✓ Correct!</strong>${q.exp}`;
+  } else {
+    wrong++;
+    sessionAnswers.push(false);
+    btn.classList.add('wrong');
+    document.querySelectorAll('.opt')[q.displayAns].classList.add('correct');
+    fb.className='feedback wrong show';
+    fb.innerHTML=`<strong>✗ Incorrect.</strong>${q.exp}`;
+  }
+  document.getElementById('live-score').textContent=`✓ ${correct}  ✗ ${wrong}`;
+  document.getElementById('next-btn').className='next-btn show';
+}
+
+/* ═══════════════════════════════
+   NEXT Q
+═══════════════════════════════ */
+function nextQ(){
+  currentQ++;
+  if(currentQ>=session.length) finalizeResults();
+  else renderQ();
+}
+
+/* ═══════════════════════════════
+   FINALIZE
+═══════════════════════════════ */
+function finalizeResults(){
+  clearInterval(timerInterval);
+  quizActive=false;
+  document.getElementById('timeout-overlay').classList.remove('show');
+
+  const total=session.length;
+  const pct=Math.round(correct/total*100);
+  const passed=pct>=70;
+  const elite=pct>=90;
+
+  // Simulated percentile based on score
+  let percentile;
+  if(pct===100) percentile='99th';
+  else if(pct>=90) percentile='Top 5%';
+  else if(pct>=80) percentile='Top 15%';
+  else if(pct>=70) percentile='Top 35%';
+  else if(pct>=60) percentile='Top 50%';
+  else percentile='Below 50th';
+
+  const mUsed=Math.floor(timeUsed/60);
+  const sUsed=timeUsed%60;
+  const timeStr=`${mUsed}:${sUsed.toString().padStart(2,'0')}`;
+
+  // Ring
+  showScreen('results');
+  setTimeout(()=>{
+    const arc=document.getElementById('ring-arc');
+    const circ=2*Math.PI*68;
+    const offset=circ-(pct/100)*circ;
+    arc.style.transition='stroke-dashoffset 1.3s cubic-bezier(.16,1,.3,1)';
+    arc.style.strokeDashoffset=offset;
+    if(!passed) arc.style.stroke='var(--orange)';
+  },100);
+
+  document.getElementById('r-pct').textContent=pct+'%';
+  document.getElementById('r-frac').textContent=`${correct}/${total}`;
+  document.getElementById('st-correct').textContent=correct;
+  document.getElementById('st-time').textContent=timeStr;
+  document.getElementById('st-percentile').textContent=percentile;
+
+  // Badge
+  let badge,title;
+  if(elite){badge='🏆 Elite Shield';title='Radiation Safety<br><span class="g">Master</span>';}
+  else if(passed){badge='🏅 Certified';title='Radiation Safety<br><span class="t">Guardian</span>';}
+  else{badge='📚 Keep Learning';title='Good Effort —<br><span style="color:var(--muted)">Review & Retry</span>';}
+  document.getElementById('r-badge').textContent=badge;
+  document.getElementById('r-title').innerHTML=title;
+
+  // Breakdown
+  const bd=document.getElementById('breakdown');
+  bd.innerHTML='';
+  session.forEach((q,i)=>{
+    const ok=sessionAnswers[i]===true;
+    const unanswered=sessionAnswers[i]===undefined;
+    const d=document.createElement('div');d.className='bd-item';
+    d.innerHTML=`
+      <span class="bd-icon">${unanswered?'⏭':ok?'✅':'❌'}</span>
+      <span class="bd-text">
+        <span class="diff-badge bd-diff diff-${q.diff}">${q.diff}</span>
+        ${q.q.substring(0,70)}…
+      </span>
+      <span class="bd-res ${ok?'ok':'fail'}">${unanswered?'SKIP':ok?'✓':'✗'}</span>
+    `;
+    bd.appendChild(d);
+  });
+
+  // Certificate
+  const cert=document.getElementById('certificate');
+  const certId='RSIQ-'+Date.now().toString(36).toUpperCase()+'-'+userData.pid;
+  const date=new Date().toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'});
+
+  if(passed){ cert.classList.remove('fail'); }
+  else { cert.classList.add('fail'); }
+
+  document.getElementById('cert-icon').textContent=elite?'🏆':passed?'🏅':'📚';
+  document.getElementById('cert-issued-text').textContent=passed?'Certificate of Achievement':'Participation Record';
+  document.getElementById('cert-name').textContent=userData.name;
+  document.getElementById('cert-desig-display').textContent=userData.desig;
+  document.getElementById('cert-inst-display').textContent=userData.inst;
+  document.getElementById('cert-award').textContent=
+    elite?'Elite Radiation Safety Master':
+    passed?'Digital Radiation Safety Guardian':
+    'Radiation Safety Learner';
+  document.getElementById('cert-body').textContent=passed?
+    `Has successfully demonstrated professional-level knowledge of Radiology Physics, AERB Guidelines, Safety Protocols, and Healthcare Safety Management in the Radiation Safety IQ Championship 2025.`:
+    `Participated in the Radiation Safety IQ Championship 2025 and scored ${correct}/${total} (${pct}%). A score of ≥70% is required for certification. Review the study guide and try again!`;
+  document.getElementById('cert-chip-score').textContent=`Score: ${correct}/${total} · ${pct}%`;
+  document.getElementById('cert-chip-pct').textContent=`Percentile: ${percentile}`;
+  document.getElementById('cert-chip-time').textContent=`Time: ${timeStr}`;
+  document.getElementById('cert-id-line').textContent=`Certificate ID: ${certId}  ·  PID: ${userData.pid}  ·  ${date}`;
+}
+
+/* ═══════════════════════════════
+   DOWNLOAD CERT
+═══════════════════════════════ */
+function downloadCert(){
+  const name=userData.name;
+  const desig=userData.desig;
+  const inst=userData.inst;
+  const pid=userData.pid;
+  const total=session.length;
+  const pct=Math.round(correct/total*100);
+  const passed=pct>=70;
+  const elite=pct>=90;
+  const certId='RSIQ-'+Date.now().toString(36).toUpperCase()+'-'+pid;
+  const date=new Date().toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'});
+  const mU=Math.floor(timeUsed/60),sU=timeUsed%60;
+  const timeStr=`${mU}:${sU.toString().padStart(2,'0')}`;
+
+  let percentile;
+  if(pct===100)percentile='99th';
+  else if(pct>=90)percentile='Top 5%';
+  else if(pct>=80)percentile='Top 15%';
+  else if(pct>=70)percentile='Top 35%';
+  else if(pct>=60)percentile='Top 50%';
+  else percentile='Below 50th';
+
+  const color=passed?'#E6B84A':'#006B65';
+  const accentRGB=passed?'255,209,102':'0,229,204';
+
+  const win=window.open('','_blank');
+  win.document.write(`<!DOCTYPE html><html><head>
+<meta charset="UTF-8"/><title>Certificate — ${name}</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&family=Outfit:wght@300;400;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#080D1A;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:30px;font-family:'Outfit',sans-serif}
+.cert{background:linear-gradient(150deg,#060C1E,#0C1830);border:2.5px solid ${color};border-radius:22px;padding:48px 44px;text-align:center;max-width:660px;width:100%;position:relative}
+.cert::before{content:'';position:absolute;inset:8px;border:1px solid rgba(${accentRGB},.18);border-radius:14px}
+.corner{position:absolute;width:40px;height:40px;border-color:${color};border-style:solid;opacity:.6}
+.tl{top:12px;left:12px;border-width:2px 0 0 2px;border-radius:3px 0 0 0}
+.tr{top:12px;right:12px;border-width:2px 2px 0 0;border-radius:0 3px 0 0}
+.bl{bottom:12px;left:12px;border-width:0 0 2px 2px;border-radius:0 0 0 3px}
+.br{bottom:12px;right:12px;border-width:0 2px 2px 0;border-radius:0 0 3px 0}
+.icon{font-size:56px;display:block;margin-bottom:14px}
+.issued{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:3px;color:#00E5CC;text-transform:uppercase;margin-bottom:12px}
+.certifies{font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:600;color:#6A82A8;letter-spacing:3px;text-transform:uppercase;margin-bottom:6px}
+.recip{font-family:'Rajdhani',sans-serif;font-size:36px;font-weight:700;color:#EEF4FF;margin-bottom:4px;text-shadow:0 0 24px rgba(0,229,204,.3)}
+.role{font-size:14px;color:#6A82A8;margin-bottom:6px}
+.award{font-family:'Rajdhani',sans-serif;font-size:24px;font-weight:700;color:${passed?'#FFD166':'#00E5CC'};margin-bottom:14px}
+.body{font-size:12.5px;color:#6A82A8;line-height:1.8;margin-bottom:18px;max-width:460px;margin-left:auto;margin-right:auto}
+.chips{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.chip{font-family:'JetBrains Mono',monospace;font-size:11px;padding:5px 14px;border-radius:20px;background:rgba(${accentRGB},.1);border:1px solid rgba(${accentRGB},.3);color:${passed?'#FFD166':'#00E5CC'}}
+.div{height:1px;background:linear-gradient(90deg,transparent,rgba(${accentRGB},.35),transparent);margin:0 0 18px}
+.footer{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:12px}
+.sig-name{font-family:'Rajdhani',sans-serif;font-size:14px;font-weight:700;color:#EEF4FF;text-align:left}
+.sig-role{font-size:10px;color:#6A82A8;letter-spacing:1px;text-align:left}
+.seal{font-size:34px;text-align:right}
+.seal-txt{font-size:9px;color:#6A82A8;letter-spacing:1px;text-align:right}
+.cert-id{font-family:'JetBrains Mono',monospace;font-size:8.5px;color:rgba(106,130,168,.4);margin-top:16px;line-height:1.6}
+@media print{body{background:#080D1A!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+</style></head><body>
+<div class="cert">
+<div class="corner tl"></div><div class="corner tr"></div>
+<div class="corner bl"></div><div class="corner br"></div>
+<span class="icon">${elite?'🏆':passed?'🏅':'📚'}</span>
+<div class="issued">${passed?'Certificate of Achievement':'Participation Record'}</div>
+<div class="certifies">This certifies that</div>
+<div class="recip">${name}</div>
+<div class="role">${desig} · ${inst}</div>
+<div class="award">${elite?'Elite Radiation Safety Master':passed?'Digital Radiation Safety Guardian':'Radiation Safety Learner'}</div>
+<div class="body">${passed?
+  'Has successfully demonstrated professional-level knowledge of Radiology Physics, AERB Guidelines, Safety Protocols, and Healthcare Safety Management in the Radiation Safety IQ Championship 2025.':
+  `Participated in the Radiation Safety IQ Championship 2025 and scored ${correct}/${total} (${pct}%). A score of ≥70% is required for certification.`
+}</div>
+<div class="chips">
+<span class="chip">Score: ${correct}/${total} · ${pct}%</span>
+<span class="chip">Percentile: ${percentile}</span>
+<span class="chip">Time: ${timeStr}</span>
+</div>
+<div class="div"></div>
+<div class="footer">
+<div><div class="sig-name">Invisible Architecture Initiative</div><div class="sig-role">Radiation Safety Championship · Conference 2025</div></div>
+<div><div class="seal">☢</div><div class="seal-txt">VERIFIED</div></div>
+</div>
+<div class="cert-id">Certificate ID: ${certId}&nbsp;&nbsp;·&nbsp;&nbsp;Participant ID: ${pid}&nbsp;&nbsp;·&nbsp;&nbsp;Issued: ${date}<br>Score: ${correct}/${total} (${pct}%) &nbsp;·&nbsp; Percentile: ${percentile} &nbsp;·&nbsp; Time Used: ${timeStr}</div>
+</div>
+<script>window.onload=()=>setTimeout(()=>window.print(),600)<\/script>
+</body></html>`);
+  win.document.close();
+}
+
+/* ═══════════════════════════════
+   SCREEN MANAGER
+═══════════════════════════════ */
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(s=>{s.classList.remove('active');s.style.display='none'});
+  const el=document.getElementById('s-'+id);
+  el.style.display='block';
+  el.offsetHeight;
+  el.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ── ENTER key on name field ── */
+document.addEventListener('DOMContentLoaded',()=>{
+  document.getElementById('inp-name').addEventListener('keydown',e=>{if(e.key==='Enter')startQuiz()});
+});
+</script>
+</body>
+</html>
